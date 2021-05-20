@@ -1,0 +1,110 @@
+.testebotao {
+    display: block;
+    width: 80%;
+    height: 250px;
+    background-image: linear-gradient(to bottom right, #122435, #151135); 
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: white;
+    background-clip: padding-box;
+    border: 0px solid #cad1d7;
+    border-radius: 0.25rem;
+    font-family: Arial;
+   
+  }
+  
+
+
+.testebotaoo {
+display: block;
+width: 80%;
+height: 250px;
+
+font-size: 0.875rem;
+font-weight: 400;
+color: black;
+background-image: linear-gradient(to bottom right, #122435, #151135); 
+border-radius: 0.25rem;
+
+  }
+
+
+
+.adicionarlinha{
+    padding: 13px 18px;
+    
+    margin-left: 78%;
+    color:white;
+    background-image: linear-gradient(to bottom right, #FF69B4, #FF00FF);
+    border-radius: 15px;
+    font-family: sans-serif;
+    border-radius: 10px
+    border: 0px;
+
+
+}
+
+
+
+
+.classetextarea1{
+    border-style: inset;
+    border-color: black;
+    border-radius: 20px;
+    margin: 5%;
+    background-color: #27293d;
+}
+
+.classetextarea2{
+    border-style: inset;
+    border-color: black;
+    border-radius: 20px;
+    margin: 5%;
+    background-color: #27293d;
+}
+
+.botaoremover{
+    padding: 9px 15px;
+    border-color: black;
+    margin-left: 88%;
+    color:white;
+    background-image: linear-gradient(to bottom right, red, yellow);
+    font-family: sans-serif;
+    border: 0px;
+    border-radius: 50px;
+    float: right !important;
+    margin-top: -62px !important;
+    margin-left: 167px !important;
+    margin-right: 11px !important;
+}
+
+.botaoremoverA{
+    padding: 13px 28px;
+    border-color: black;
+    margin-left: 78%;
+    color:white;
+    background-image: linear-gradient(to bottom right, red, yellow); 
+    font-family: sans-serif;
+    border-radius: 20px;
+    
+    
+}
+
+.divradios{
+    border-radius:     4px;
+    margin-left: 5%;
+
+
+    }
+.divradiosinput {
+    width: 80%; 
+    font-size:0.875rem;
+    height: 70px;
+    background-image: linear-gradient(to bottom right, #122435, #151135); 
+    
+}
+
+.divradiosinputra{
+    
+    position: relative;
+}

@@ -1,0 +1,214 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<title>Login V1</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static 'login/images/icons/favicon.ico' %}"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{% static 'login/images/IM-02.jpg' %}" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form" action="{% url 'cadastro' %}" method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					<span class="login100-form-title">
+						Tela de cadastro:
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Insira algum nome">
+                        <a class="txt2">
+							Crie um nome de usuario
+						</a>
+						<input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+                    <div class="wrap-input100 validate-input" data-validate = "Insira algum nome">
+                        <a class="txt2">
+							Digite seu nome
+						</a>
+						<input class="input100" type="text" name="nome" placeholder="Nome">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate = "Insira algum nome">
+                        <a class="txt2">
+							Digite seu sobrenome
+						</a>
+						<input class="input100" type="text" name="sobrenome" placeholder="Sobrenome">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Insira algum nome">
+                        <a class="txt2">
+							Digite seu numero
+						</a>
+						<input class="input100" type="text" name="telefone" placeholder="numero">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Insira um email válido">
+                        <a class="txt2">
+							Cadastrar email
+						</a>
+						<input class="input100" type="text" name="email" placeholder="Email">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+                    <div class="wrap-input100 validate-input" data-validate = "Insira alguma data">
+                        <a class="txt2">
+							Data de nascimento
+						</a>
+						<input class="input100" type="date" name="nasc" placeholder="Nascimento">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Cadastre uma senha">
+                        <a class="txt2">
+							Sexo</a>
+					<fieldset>
+						
+						<label  for="Masculino"><input type="radio" name="sexo" value="masculino" id="radio-masculino"> Masculino</label>
+						<label  for="Feminino"><input type="radio" name="sexo" value="feminino" id="radio-telefone"> Feminino</label>
+					</fieldset>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Insira algum curso">
+					<a class="txt2">
+						Estado
+					</a>
+					<select  id="estado" name="estado" > </select>
+					
+										
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Insira algum curso">
+					<a class="txt2">
+						Cidade
+					</a>
+					<select  id="cidade" name="cidade" > </select>
+					
+										
+				</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Insira algum curso">
+                        <a class="txt2">
+							Senha
+						</a>
+						<input class="input100" type="password" name="senha" placeholder="senha" >
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Insira algum nome">
+                        <a class="txt2">
+							Confirme sua senha
+						</a>
+						<input class="input100" type="password" name="senha2" placeholder="senha">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div>
+						<div class="wrap-input100 validate-input" data-validate = "Insira algum nome">
+							<a class="txt2">
+								Foto
+							</a>
+						<input type="file" class="form-control" name="foto" ></div>
+					
+
+					
+
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Finalizar Cadastro
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Voltar para a tela de
+						</span>
+						<a class="txt2" href="{% url 'dashboard' %}">
+							Login
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	
+<!--===============================================================================================-->	
+<script src="{% static 'login/js/cidades-estados.js' %}"></script>
+
+<script language="JavaScript" type="text/javascript" >
+	new dgCidadesEstados({
+	  cidade: document.getElementById('cidade'),
+	  estado: document.getElementById('estado')
+	})
+  </script>
+<script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+	<script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/vendor/tilt/tilt.jquery.min.js' %}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static 'login/js/main.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,574 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>
+    Exercícios - MathWars
+  </title>
+  <!-- Jquery -->
+ 
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <script type="text/javascript" src="{% static '/assets/js/jquery-3.6.0.js' %}"></script>
+
+  <link href="{% static '/assets/css/nucleo-icons.css' %}" rel="stylesheet" />
+  <!-- CSS Files -->
+  
+  <link href="{% static '/assets/css/black-dashboard.css' %}" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="{% static '/assets/demo/demo.css' %}" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  
+  <link href="{% static '/assets/css/csseditavel.css' %}" rel="stylesheet" />
+  <!-- CSS Files -->
+
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+
+</head>
+
+<body class="">
+  <div class="wrapper">
+    <div class="sidebar">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red"
+    -->
+      <div class="sidebar-wrapper">
+       
+        <ul class="nav">
+          <li class="active ">
+            <a href="{% url 'dashboard' %}">
+              <i class="tim-icons icon-chart-pie-36"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'perfil' %}">
+              <i class="tim-icons icon-single-02"></i>
+              <p>Perfil</p>
+            </a>
+          </li>
+        
+          
+        </ul>
+      </div>
+     
+
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle d-inline">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
+            </div>
+            <a class="navbar-brand" href="javascript:void(0)">Exercícios</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navigation">
+            <ul class="navbar-nav ml-auto">
+              <li class="dropdown nav-item">
+                <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="notification d-none d-lg-block d-xl-block"></div>
+                  <i class="tim-icons icon-bell-55"></i>
+                  <p class="d-lg-none">
+                    Notifications
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                  <li class="nav-link"><a href="#" class="nav-item dropdown-item">ex notificação 1</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">ex notificação 2</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">ex notificação 3</a></li>
+                </ul>
+              </li>
+              <li class="dropdown nav-item">
+                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                  <div class="photo">
+                    <img src="{% static 'assets/img/anime3.png' %}" alt="Profile Photo">
+                  </div>
+                  <b class="caret d-none d-lg-block d-xl-block"></b>
+                  <p class="d-lg-none">
+                    Log out
+                  </p>
+                </a>
+                <ul class="dropdown-menu dropdown-navbar">
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
+                  <li class="dropdown-divider"></li>
+                  <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                </ul>
+              </li>
+              <li class="separator d-lg-none"></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="modal modal-search fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <i class="tim-icons icon-simple-remove"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Navbar -->
+      <div class="content">
+        <div class="row" style="width: 150%;">
+          <div class="col-md-8">
+            <form class="op-texto "  action="{% url 'responder' %}" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+
+              {%if materia %}
+              <p>Modulo</p>
+              <select name="select">
+                {% for materias in materia %}
+                <option value={{ materias.id }}>{{ materias.nome }}</option>
+                {% endfor %}
+              </select>
+             {%endif%}
+
+              {%if exercicios %}
+              <p>Nome do exercicios </p>
+              <select name="select2">
+                {% for exercicio in exercicios %}
+                <option value={{ exercicio.id }}>{{ exercicio.nome }}</option>
+                {% endfor %}
+              </select>
+              {% endif %}
+              <input id="inicio" style="visibility:hidden " name="inicio" value={{inicio}}></input>
+              <input id="inicio" style="visibility:hidden " name="perguntass" value={{perguntass}}></input>
+              <input id="inicio" style="visibility:hidden " name="id_q" value={{id_q}}></input>
+              
+              {%if perguntas %}
+              {% for pergunta in perguntas %}
+              {%if pergunta.0 == 0 %}
+              <p>{{pergunta.1}}</p>
+              <input name={{ pergunta.2 }}>      </input><br><br><br>
+
+              {% elif pergunta.0 == 1 %}
+              <p>{{pergunta.1}}</p>
+              {% for alt in pergunta.4 %}
+              {% if alt.1 == 1 %}
+              <input type="radio" checked id="age1" name={{ pergunta.2 }} value={{ alt.1 }}>
+              <label for="age1"> {{ alt.0 }}</label><br>
+
+              {% else %}
+              <input type="radio" id="age1" name={{ pergunta.2 }} value={{ alt.1 }}>
+              <label for="age1"> {{ alt.0 }}</label><br>
+
+              {% endif %}
+              {% endfor %}
+
+
+              {% endif %}
+              {% endfor %}
+
+              {% endif %}
+             
+
+              <button class="adicionarlinha">
+                enviar
+              </button>
+                
+                  
+              <input id="numerodequestoes" style="visibility:hidden " name="numerodequestoes" value=0></input>
+              </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+</div>
+  <div class="fixed-plugin">
+    <div class="dropdown show-dropdown">
+      <a href="#" data-toggle="dropdown">
+        <i class="fa fa-cog fa-2x"> </i>
+      </a>
+      <ul class="dropdown-menu">
+        <li class="header-title"> Sidebar Background</li>
+        <li class="adjustments-line">
+          <a href="javascript:void(0)" class="switch-trigger background-color">
+            <div class="badge-colors text-center">
+              <span class="badge filter badge-primary active" data-color="primary"></span>
+              <span class="badge filter badge-info" data-color="blue"></span>
+              <span class="badge filter badge-success" data-color="green"></span>
+            </div>
+            <div class="clearfix"></div>
+          </a>
+        </li>
+        <li class="adjustments-line text-center color-change">
+          <span class="color-label">LIGHT MODE</span>
+          <span class="badge light-badge mr-2"></span>
+          <span class="badge dark-badge ml-2"></span>
+          <span class="color-label">DARK MODE</span>
+        </li>
+        <li class="button-container text-center">
+          <button id="twitter" class="btn btn-round btn-info"><i class="fab fa-twitter"></i> &middot; @MathWars</button>
+          <button id="facebook" class="btn btn-round btn-info"><i class="fab fa-instagram"></i> &middot; @MathWars</button>
+          <br>
+          <br>
+        </li>
+      </ul>
+      
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+    var divPai = $('.formulariodeadicionar');
+    
+    var btnCriar = $('#criarenunciado');
+    var btnCriar2 = $('#criarenunciado2');
+    var numero_enunciado = 0;
+    var numero_alternativa = 0;
+    var numero_de_questoes = 0;
+    var divalternativa = "";
+
+    var apagar = "";
+  
+    
+    btnCriar.click(function(){
+      numero_de_questoes += 1
+      numero_enunciado += 1
+      divalternativa ='<div class="classetextarea1" id="enunciado' + numero_enunciado + '"><br>'
+      divalternativa += '<a class="cordapergunta" style="color: whitesmoke; margin: 10%; margin-right: 20%; font-family: Impact; font-size: 35px;" id="pergunta' + numero_enunciado + '">Pergunta numero:</a>'
+      divalternativa += '<button class="botaoremover" id="bt_' + numero_enunciado + '"  type="button" >X </button><textarea name="questao' + numero_enunciado + '" class="testebotao" id="enunciado' + numero_enunciado + '"  style="margin-left: 10%;"  ></textarea><br>'
+      divalternativa += '<input id="questao' + numero_enunciado + '_e" style="visibility:hidden " name="questao' + numero_enunciado + '_e" value=0></input>'
+      divalternativa += '<br><br></div>'
+      divPai.append(divalternativa);
+        
+      $("#pergunta" + numero_enunciado).text("Pergunta numero " + numero_de_questoes +":" );
+      $("#numerodequestoes").text(numero_de_questoes);
+
+      document.getElementById('numerodequestoes').value = numero_de_questoes;
+      
+    });
+     
+    
+    
+    
+    
+  btnCriar2.click(function(){
+      numero_de_questoes += 1
+      numero_enunciado += 1
+      divalternativa = '<div class="classetextarea2" id="enunciado' + numero_enunciado +'"><br>'
+      divalternativa += '<a class="cordapergunta" style="color: whitesmoke; margin: 10%; margin-right: 20%; font-family: Impact; font-size: 35px;" id="pergunta' + numero_enunciado + '">Pergunta numero:</a>'
+      divalternativa += '<button class="botaoremover" id="bt_' + numero_enunciado + '"  type="button" >X</button><textarea name="questao' + numero_enunciado + '" class="testebotaoo" id="enunciado' + numero_enunciado + '" style="margin-left: 10%;" ></textarea><br>'
+      divalternativa += '<p id="tamanho' + numero_enunciado + '" style="visibility:hidden ">1</p>'
+      divalternativa += '<input id="quantidadealternativas' + numero_enunciado + '" style="visibility:hidden " name="quantidadealternativas' + numero_enunciado + '" value=1></input>'
+      divalternativa += '<div class="divradios" id="linha'+numero_enunciado +'"> <br>'
+      divalternativa += '<input class="divradiosinputra" type="radio" id="'+ numero_enunciado + '_1" name="radio'+ numero_enunciado +'" checked value="1">'
+      divalternativa += '<input type="text"  style="width: 70%;" name="resposta_'+ numero_enunciado + '_1">  </div>'
+      divalternativa += '<button class="adicionarlinha" style=" margin-right: 5%;" id="'+ numero_enunciado +'_b_1" type="button" >Adicionar outra alternativa </button>'
+      divalternativa += '<input id="questao' + numero_enunciado + '_e" style="visibility:hidden " name="questao' + numero_enunciado + '_e" value=1></input>'
+      divalternativa += '<br><br></div> '
+      divPai.append(divalternativa);
+      $("#pergunta" + numero_enunciado).text("Pergunta numero " + numero_de_questoes +":" );
+      document.getElementById('numerodequestoes').value = numero_de_questoes;
+      
+  });
+   
+  $('.formulariodeadicionar').on('click', '.adicionarlinha', function () {
+                  var button_id = $(this).attr("id");
+                  var button_id2 = $(this).attr("id");
+                  var tamanho = $("#tamanho" + button_id2[0]).text()
+                  tamanho = parseInt(tamanho)
+                  $("#tamanho" + button_id2[0]).text(tamanho+1);
+                 
+                  
+                  button_id = parseInt(button_id.split("_").pop())
+                  button_id2 = button_id2.split("_")
+                  $('#quantidadealternativas' + button_id2[0]).remove();
+                 
+                  var temp = '<input id="quantidadealternativas' + button_id2[0] + '" style="visibility:hidden " name="quantidadealternativas' + button_id2[0] + '" value=' + (tamanho+1)+ '></input>'
+               
+                  $("#enunciado" + button_id2[0] ).append(temp)
+                
+
+
+
+                  var linharadio = '<br><br><input class="divradiosinputra" type="radio" id="'+ button_id2[0] + '_' + (button_id+1) +'" name="radio'+ button_id2[0] +'" value="' + (button_id+1) + '">'
+                  linharadio += '<input type="text"  style="width: 70%;" name="resposta_'+ button_id2[0] + '_' + (button_id+1) +'">  </div>'
+                  $('#' + button_id2[0] + '_b_' + (button_id) ).attr('id', button_id2[0] + "_b_" + (button_id+1) )
+                  $('#linha' + button_id2[0]).append(linharadio);
+                  
+              });
+  
+  $('.formulariodeadicionar').on('click', '.botaoremover', function () {
+                  var button_id = $(this).attr("id");
+                  button_id = parseInt(button_id.split("_").pop())
+                  $('#enunciado' + button_id).remove();
+                  
+                  for (var i = button_id + 1; i <= numero_de_questoes; i++) {
+                
+                    
+                    
+                    $('#enunciado' + i).attr('id', "enunciado" + button_id)
+                    $('#pergunta' + i).attr('id', "pergunta" + button_id)
+                    $("#pergunta" + button_id).text("Pergunta numero " + button_id +":" )
+                    $('#enunciado' + i).attr('name', "questao" + button_id)
+                    $('#quantidadealternativas' + i).attr('name','quantidadealternativas' + button_id)
+                    $('#questao' + i + "_e").attr('name','questao' + button_id + "_e")
+                    $('#quantidadealternativas' + i).attr('id','quantidadealternativas' + button_id)
+                    $('#questao' + i + "_e").attr('id','questao' + button_id + "_e")
+                    $('#enunciado' + i).attr('id', "enunciado" + button_id)
+                    
+                    $("#bt_" + i).attr('id', "bt_" + button_id)
+                    
+                    var radios = $('#linha' + i);
+                    if (radios.length){
+                      $('#linha' + i).attr('id', "linha" + button_id)
+                      var tamanho = $("#tamanho" + i).text()
+                      $('#tamanho' + i).attr('id', "tamanho" + button_id)
+                      tamanho = parseInt(tamanho)
+                      for  (var j = tamanho; j >=1; j--){
+                        $('#' + i + "_" + j).attr('name', "radio" + button_id)
+                        $('#' + i + "_" + j).attr('id', button_id + "_" + j)
+                        $('[name=resposta_' + i + "_" + j + "]").attr('name', "resposta_"  + button_id + "_" + j)
+                        
+                        
+                        
+
+
+
+                      }
+                      console.log("dwad")
+                      console.log(tamanho)
+
+                    }
+                    button_id +=1
+                    
+                  } 
+                  numero_enunciado -= 1
+      numero_de_questoes -= 1
+      document.getElementById('numerodequestoes').value = numero_de_questoes;
+
+
+                  
+                  
+                  
+              });
+
+  $('.formulariodeadicionar').on('click', '.botaoremoverA', function () {
+      var button_id = $(this).attr("id");
+      button_id = parseInt(button_id.split("_").pop())
+      
+      $('#enunciado' + button_id).remove();
+      for (var i = button_id + 1; i <= numero_de_questoes; i++) {
+      
+                    
+        $('#enunciado' + i).attr('id', "enunciado" + button_id)
+        $('#pergunta' + i).attr('id', "pergunta" + button_id)
+        $("#pergunta" + button_id).text("Pergunta numero " + button_id +":" )
+        $('#enunciado' + i).attr('id', "enunciado" + button_id)
+        $("#bt_" + i).attr('id', "bt_" + button_id)
+
+        var radios = $('#linha' + i);
+        if (radios.length){
+          console.log("deucerto")
+
+        }
+        button_id +=1
+        
+      
+      }
+      numero_enunciado -= 1
+      numero_de_questoes -= 1
+      
+  });
+            });
+    </script>
+
+
+  <!--   Core JS Files   -->
+  <script src="{% static '/assets/js/core/jquery.min.js' %}"></script>
+<script src="{% static '/assets/js/core/popper.min.js' %}"></script>
+<script src="{% static '/assets/js/core/bootstrap.min.js' %}"></script>
+<script src="{% static '/assets/js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
+<!--  Google Maps Plugin    -->
+<!-- Place this tag in your head or just before your close body tag. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- Chart JS -->
+<script src="{% static '/assets/js/plugins/chartjs.min.js' %}"></script>
+<!--  Notifications Plugin    -->
+<script src="{% static '/assets/js/plugins/bootstrap-notify.js' %}"></script>
+<!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="{% static '/assets/js/black-dashboard.min.js' %}"></script><!-- Black Dashboard DEMO methods, don't include it in your project! -->
+<script src="{% static '/assets/demo/demo.js' %}"></script>
+  <script>
+    $(document).ready(function() {
+      $().ready(function() {
+        $sidebar = $('.sidebar');
+        $navbar = $('.navbar');
+        $main_panel = $('.main-panel');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+        sidebar_mini_active = true;
+        white_color = false;
+
+        window_width = $(window).width();
+
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+
+        $('.fixed-plugin a').click(function(event) {
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
+            }
+          }
+        });
+
+        $('.fixed-plugin .background-color span').click(function() {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data', new_color);
+          }
+
+          if ($main_panel.length != 0) {
+            $main_panel.attr('data', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data', new_color);
+          }
+        });
+
+        $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function() {
+          var $btn = $(this);
+
+          if (sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            sidebar_mini_active = false;
+            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+          } else {
+            $('body').addClass('sidebar-mini');
+            sidebar_mini_active = true;
+            blackDashboard.showSidebarMessage('Sidebar mini activated...');
+          }
+
+          // we simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function() {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          // we stop the simulation of Window Resize after the animations are completed
+          setTimeout(function() {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+        });
+
+        $('.switch-change-color input').on("switchChange.bootstrapSwitch", function() {
+          var $btn = $(this);
+
+          if (white_color == true) {
+
+            $('body').addClass('change-background');
+            setTimeout(function() {
+              $('body').removeClass('change-background');
+              $('body').removeClass('white-content');
+            }, 900);
+            white_color = false;
+          } else {
+
+            $('body').addClass('change-background');
+            setTimeout(function() {
+              $('body').removeClass('change-background');
+              $('body').addClass('white-content');
+            }, 900);
+
+            white_color = true;
+          }
+
+
+        });
+
+        $('.light-badge').click(function() {
+          $('body').addClass('white-content');
+        });
+
+        $('.dark-badge').click(function() {
+          $('body').removeClass('white-content');
+        });
+      });
+    });
+  </script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS &&
+      TrackJS.install({
+        token: "ee6fab19c5a04ac1a32a645abde4613a",
+        application: "black-dashboard-free"
+      });
+
+      // script do botão começa aqui
+      $(document).ready(function(){
+var divPai = $('.Linha');
+var btnCriar = $('#criarLinha');
+var btnexcluir = $('#excluirLinha');
+var numero_clicks = 0;
+var apagar = ""
+
+
+
+
+btnCriar.click(function(){
+    numero_clicks += 1
+    divPai.append("<div name='" + numero_clicks + "'' id='" + numero_clicks + "' > questao numero " + numero_clicks + "<br> <input>  <br> <input>  <button type='button' id='" + numero_clicks + "' class='btn-apagar'> - </button><br></div>");
+    
+    $("#xazam").text(numero_clicks);
+});
+ 
+
+
+btnexcluir.click(function(){
+    apagar = "#" + numero_clicks
+    $("#apagar").text(apagar);
+    $(apagar).remove()
+    numero_clicks -= 1
+    $("#xazam").text(numero_clicks);
+});
+ 
+
+$('.Linha').on('click', '.btn-apagar', function () {
+                var button_id = $(this).attr("id");
+                $("#teste").text(button_id);
+                $('#' + button_id).remove();
+            });
+}); 
+
+  </script>
+</body>
+
+</html>
